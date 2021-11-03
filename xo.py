@@ -3,10 +3,13 @@ import numpy as np
 from tkinter import *
 from tkinter import messagebox
 
-# initializes pygame
+# เซ็ตค่าเริ่มต้นเกม
 pygame.font.init()
+
 Tk().wm_withdraw()
 
+#  Variable
+#SIZE
 WIDTH = 600
 HEIGHT = 600
 LINE_WIDTH = 15
@@ -19,13 +22,14 @@ CIRCLE_WIDTH = 15
 CROSS_WIDTH = 25
 SPACE = 55
 
+#COLOR
 RED = (255, 0, 0)
 BG_COLOR = (243, 196, 196)
 LINE_COLOR = (185, 69, 69)
 CIRCLE_COLOR = (66, 66, 66)
 CROSS_COLOR = (210, 176, 115)
 
-#สร้าง gui
+#สร้าง GUI
 screen = pygame.display.set_mode( (WIDTH, HEIGHT) )
 pygame.display.set_caption( 'Client' )
 screen.fill( BG_COLOR )
@@ -37,6 +41,7 @@ board = np.zeros( (BOARD_ROWS, BOARD_COLS) )
 
 #funtion
 def draw_lines():
+#วาดเส้นตาราง
 	#แนวนอน
 	pygame.draw.line( screen, LINE_COLOR, (0, SQUARE_SIZE), (WIDTH, SQUARE_SIZE), LINE_WIDTH )
 	pygame.draw.line( screen, LINE_COLOR, (0, 2 * SQUARE_SIZE), (WIDTH, 2 * SQUARE_SIZE), LINE_WIDTH )
@@ -46,7 +51,7 @@ def draw_lines():
 	pygame.draw.line( screen, LINE_COLOR, (2 * SQUARE_SIZE, 0), (2 * SQUARE_SIZE, HEIGHT), LINE_WIDTH )
 
 def draw_figures():
-#ใช้สำหรับวาดรูปลงในช่อง
+#ใช้สำหรับวาดสัญลักษณ์ลงในบอร์ด
 	for row in range(BOARD_ROWS):
 		for col in range(BOARD_COLS):
                         #O
@@ -60,13 +65,15 @@ def draw_figures():
 def mark_square(row, col, player):
 #กำหนดค่าลงในอาเรย์
 #อาเรย์ 3d ที่ได้จากไลบรารี่ numpy
-#{ 0 , 0 , 0 }
-#{ 0 , 0 , 0 }
-#{ 0 , 0 , 0 }
+#{ 0 , 1 , 0 }
+#{ 0 , 1 , 2 }
+#{ 0 , 1 , 2 }
 #0 แทน ช่องว่าง
 #1 แทน ผู้เล่น 1 , 2 แทน ผู้เล่น 2
 	board[row][col] = player
+
 def available_square(row, col):
+#เช็คว่าช่องว่างไหม
 	return board[row][col] == 0
 
 def check_board_full():
