@@ -38,6 +38,12 @@ messagebox.showinfo('Info','Player 1 started first')
 
 #อาเรย์ 3D ของบอร์ด
 board = np.zeros( (BOARD_ROWS, BOARD_COLS) )
+#อาเรย์ 3d ที่ได้จากไลบรารี่ numpy
+#{ 0 , 1 , 0 }
+#{ 0 , 1 , 2 }
+#{ 0 , 1 , 2 }
+#0 ใช้แทน ช่องว่าง
+#1 แทน ผู้เล่น 1 , 2 แทน ผู้เล่น 2
 
 #funtion
 def draw_lines():
@@ -63,13 +69,7 @@ def draw_figures():
 				pygame.draw.line( screen, CROSS_COLOR, (col * SQUARE_SIZE + SPACE, row * SQUARE_SIZE + SPACE), (col * SQUARE_SIZE + SQUARE_SIZE - SPACE, row * SQUARE_SIZE + SQUARE_SIZE - SPACE), CROSS_WIDTH )
 
 def mark_square(row, col, player):
-#กำหนดค่าลงในอาเรย์
-#อาเรย์ 3d ที่ได้จากไลบรารี่ numpy
-#{ 0 , 1 , 0 }
-#{ 0 , 1 , 2 }
-#{ 0 , 1 , 2 }
-#0 แทน ช่องว่าง
-#1 แทน ผู้เล่น 1 , 2 แทน ผู้เล่น 2
+#กำหนดค่าลงในบอร์ดอาเรย์
 	board[row][col] = player
 
 def available_square(row, col):
