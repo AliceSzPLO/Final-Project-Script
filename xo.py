@@ -7,13 +7,6 @@ from tkinter import messagebox
 pygame.font.init()
 Tk().wm_withdraw()
 
-'''
-# Network
-client = None
-HOST_IP = "localhost"
-HOST_PORT = 6060
-'''
-
 WIDTH = 600
 HEIGHT = 600
 LINE_WIDTH = 15
@@ -88,7 +81,7 @@ def check_board_full():
 def check_win(player):
 #คอนดิชั่นเช็ค โดยจะเช็คได้ 4 แบบคือ แนวตั้ง แนวนอน เฉียงซ้ายและขวา
 	#เช็คแนวตั้ง
-	msg = "Player "+str(player)+" won, press space for restart..."
+	msg = "Player "+str(player)+" won, press space to restart..."
 	for col in range(BOARD_COLS):
 		if board[0][col] == player and board[1][col] == player and board[2][col] == player:
 			draw_vertical_winning_line(col, player)
@@ -184,9 +177,12 @@ while True:
 					game_over = True
 					
 				player = player % 2 + 1
-
+								
 				draw_figures()
 
+			if check_board_full():
+				messagebox.showinfo('Game Over!','Draw!, Press space to restart')
+				
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_SPACE:
 				restart()
@@ -194,4 +190,6 @@ while True:
 				game_over = False
 
 	pygame.display.update()
+
+	
 
